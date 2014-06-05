@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Samples_Activity.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,9 @@ namespace Samples_Activity.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var model = new RepoList("AzureADSamples");
+    
+            return View(model);
         }
 
         public ActionResult About()
