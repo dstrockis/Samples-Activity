@@ -18,12 +18,12 @@
             <td>Repo Name</td>
             <td>Number of Contributors</td>
         </tr>
-        @foreach (Samples_Activity.Models.RepoList.repo repo in Model.repos)
+        @*@foreach (Samples_Activity.Models.RepoList.repo repo in Model.repos)
         {   <tr>
                 <td>@repo._repo.Owner.Login</td>
                 <td>@repo._repo.Name</td>
                 <td>@repo._contributorCount</td>
             </tr>
-        }
+        }*@
     </table>
 </div>
