@@ -2,6 +2,8 @@
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
+using Samples_Activity.Models;
+using Owin.Security.Providers.GitHub;
 
 namespace Samples_Activity
 {
@@ -33,6 +35,8 @@ namespace Samples_Activity
             //   appSecret: "");
 
             //app.UseGoogleAuthentication();
+
+            app.UseGitHubAuthentication(Globals.GitHubClientID, Globals.GitHubClientSecret);
         }
     }
 }

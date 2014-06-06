@@ -11,7 +11,7 @@ namespace Samples_Activity.Controllers
     {
         public ActionResult Index()
         {
-            var model = new RepoList("AzureADSamples");
+            var model = new RepoList(Globals.GitHubOrg, Globals.GitHubAppName);
     
             return View(model);
         }
