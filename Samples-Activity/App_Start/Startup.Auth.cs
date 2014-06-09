@@ -4,6 +4,7 @@ using Microsoft.Owin.Security.Cookies;
 using Owin;
 using Samples_Activity.Models;
 using Owin.Security.Providers.GitHub;
+using System.Security.Claims;
 
 namespace Samples_Activity
 {

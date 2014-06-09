@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Samples_Activity.Models;
+using Microsoft.Owin.Host.SystemWeb;
 
 namespace Samples_Activity.Controllers
 {
@@ -195,7 +196,8 @@ namespace Samples_Activity.Controllers
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
-        {
+        { 
+
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
             {
@@ -252,6 +254,7 @@ namespace Samples_Activity.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
+
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Manage");

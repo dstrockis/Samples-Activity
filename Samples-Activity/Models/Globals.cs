@@ -46,6 +46,28 @@ namespace Samples_Activity.Models
                 return "6a844ce7f938b7702abaeee2ffc346c3ed02c871";
             }
         }
+
+        public static string GitHubAuthServerUriBase
+        {
+            get
+            {
+                return "https://github.com";
+            }
+        }
+        public static string GitHubAuthPath
+        {
+            get
+            {
+                return "/login/oauth/authorize";
+            }
+        }
+        public static string GitHubTokenPath
+        {
+            get
+            {
+                return "/login/oauth/access_token";
+            }
+        }
     }
 
 }
