@@ -22,22 +22,27 @@ namespace Samples_Activity.Controllers
                 Credentials = new Credentials("dstrockis", "@Mammoth2")
             };
             var repos = await github.Repository.GetAllForOrg(Globals.GitHubOrg);
-            var contributors = await github.Repository.GetAllContributors(repos[0].Owner.Login, repos[0].Name);
-            var commitActivity = await github.Repository.Statistics.GetCommitActivity(repos[0].Owner.Login, repos[0].Name);
-            var codeFrequency = await github.Repository.Statistics.GetCodeFrequency(repos[0].Owner.Login, repos[0].Name);
-            var participation = await github.Repository.Statistics.GetParticipation(repos[0].Owner.Login, repos[0].Name);
-            var punchCard = await github.Repository.Statistics.GetPunchCard(repos[0].Owner.Login, repos[0].Name);
 
-            //var model = new Repo(repos[0], contributors.Count, contributors, commitActivity, codeFrequency, participation, punchCard);
-            var model = new Repo(repos[0]);
-
-            if (ModelState.IsValid)
+            var model = new List<Repo>();
+            foreach (var repo in repos) 
             {
-                db.Repos.Add(model);
-                //db.SaveChanges();
+                var contributors = await github.Repository.GetAllContributors(repo.Owner.Login, repo.Name);
+                var commitActivity = await github.Repository.Statistics.GetCommitActivity(repo.Owner.Login, repo.Name);
+                var codeFrequency = await github.Repository.Statistics.GetCodeFrequency(repo.Owner.Login, repo.Name);
+                var participation = await github.Repository.Statistics.GetParticipation(repo.Owner.Login, repo.Name);
+                var punchCard = await github.Repository.Statistics.GetPunchCard(repo.Owner.Login, repo.Name);
+
+                var newRepo = new Repo(repo, contributors, commitActivity, codeFrequency, participation, punchCard);
+                model.Add(newRepo);
+                if (ModelState.IsValid)
+                {
+                    db.Repos.Add(newRepo); //AddOrUpdate???
+                }
             }
 
+            //db.SaveChanges();
             return View(model);
+           
         }
 
         public ActionResult About()

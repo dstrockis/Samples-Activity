@@ -7,16 +7,14 @@ namespace Samples_Activity.Models
 {
     public class Repo : Octokit.Repository
     {
-        //public int id { get; set; }
-        //public Octokit.Repository repo { get; set; }
-        //public int contributorCount { get; set; }
-        //public IReadOnlyList<Contributor> contributors { get; set; }
-        //public IReadOnlyList<CommitActivity> commitActivity { get; set; }
-        //public IReadOnlyList<CodeFrequency> codeFrequency { get; set; }
-        //public IReadOnlyList<Participation> participation { get; set; }
-        //public IReadOnlyList<PunchCard> punchCard { get; set; }
+        public IReadOnlyList<User> contributors { get; set; }
+        public CommitActivity commitActivity { get; set; }
+        public CodeFrequency codeFrequency { get; set; }
+        public Participation participation { get; set; }
+        public PunchCard punchCard { get; set; }
 
-        public Repo(Repository repo)
+        public Repo(Repository repo, IReadOnlyList<User> contributors, CommitActivity commitActivity, 
+            CodeFrequency codeFrequency, Participation participation, PunchCard punchCard)
         {
             this.CloneUrl = repo.CloneUrl;
             this.CreatedAt = repo.CreatedAt;
@@ -47,6 +45,11 @@ namespace Samples_Activity.Models
             this.UpdatedAt = repo.UpdatedAt;
             this.Url = repo.Url;
             this.WatchersCount = repo.WatchersCount;
+            this.contributors = contributors;
+            this.commitActivity = commitActivity;
+            this.codeFrequency = codeFrequency;
+            this.participation = participation;
+            this.punchCard = punchCard;
         }
     }
 }

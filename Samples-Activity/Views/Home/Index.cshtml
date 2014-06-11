@@ -2,7 +2,7 @@
     ViewBag.Title = "Home Page";
 }
 
-@model Samples_Activity.Models.Repo
+@model List<Samples_Activity.Models.Repo>
 
 <div class="jumbotron">
     <h2>Azure AD Samples Activity Summary</h2>
@@ -18,17 +18,17 @@
             <td>Repo Name</td>
             <td>Number of Contributors</td>
         </tr>
-        @*@foreach (Samples_Activity.Models.RepoList.repo repo in Model.repos)
+        @foreach (Samples_Activity.Models.Repo repo in Model)
         {   <tr>
-                <td>@repo._repo.Owner.Login</td>
-                <td>@repo._repo.Name</td>
-                <td>@repo._contributorCount</td>
+                <td>@repo.Owner.Login</td>
+                <td>@repo.Name</td>
+                <td>@repo.contributors.Count</td>
             </tr>
-        }*@
-        <tr>
+        }
+        @*<tr>
             <td>Test</td>
             <td>Test</td>
             <td>Test</td>
-        </tr>
+        </tr>*@
     </table>
 </div>
