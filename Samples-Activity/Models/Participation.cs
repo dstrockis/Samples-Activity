@@ -11,6 +11,7 @@ namespace Samples_Activity.Models
         public int All { get; set; }
         public int Owner { get; set; }
 
+        public Participation() { }
         public Participation(int All, int Owner)
         {
             this.All = All;

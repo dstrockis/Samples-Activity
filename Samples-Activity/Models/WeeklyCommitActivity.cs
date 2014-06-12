@@ -12,6 +12,8 @@ namespace Samples_Activity.Models
             public int Id { get; set; }
             public int Count { get; set; }
 
+            public DayCount() { }
+
             public DayCount(int count)
             { Count = count; }
         }
@@ -19,6 +21,8 @@ namespace Samples_Activity.Models
         public long Week { get; set; }
         public int Total { get; set; }
         public ICollection<DayCount> Days { get; set; }
+
+        public WeeklyCommitActivity() { }
 
         public WeeklyCommitActivity(Octokit.WeeklyCommitActivity weeklyAct)
         {

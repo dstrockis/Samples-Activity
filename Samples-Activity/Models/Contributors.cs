@@ -15,6 +15,7 @@ namespace Samples_Activity.Models
             public int D { get; set; }
             public int C { get; set; }
 
+            public WeeklyHash() { }
             public WeeklyHash(long W, int A, int D, int C)
             {
                 this.W = W;
@@ -29,6 +30,8 @@ namespace Samples_Activity.Models
         public string AuthorType { get; set; }
         public int Total { get; set; }
         public ICollection<WeeklyHash> Weeks { get; set; }
+
+        public Contributors() { }
 
         public Contributors(Octokit.Author author, int total, IEnumerable<Octokit.WeeklyHash> weeks)
         {

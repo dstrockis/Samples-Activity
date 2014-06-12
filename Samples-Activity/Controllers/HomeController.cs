@@ -10,6 +10,11 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity.Migrations;
+using System.Data;
+using System.Data.Entity;
+
+
+
 
 namespace Samples_Activity.Controllers
 {
@@ -17,7 +22,27 @@ namespace Samples_Activity.Controllers
     {
         private RepoContext db = new RepoContext();
         public async Task<ActionResult> Index()
-        {   
+        {
+            var repoList = await db.Repo.ToListAsync();
+            return View();
+        }
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        public async Task<ActionResult> Refresh()
+        {
             var github = new GitHubClient(new ProductHeaderValue(Globals.GitHubAppName))
             {
                 Credentials = new Credentials("dstrockis", "@Mammoth2")
@@ -25,7 +50,7 @@ namespace Samples_Activity.Controllers
             var repos = await github.Repository.GetAllForOrg(Globals.GitHubOrg);
 
             var model = new List<Repo>();
-            foreach (var repo in repos) 
+            foreach (var repo in repos)
             {
                 var contributors = await github.Repository.Statistics.GetContributors(repo.Owner.Login, repo.Name);
                 var commitActivity = await github.Repository.Statistics.GetCommitActivity(repo.Owner.Login, repo.Name);
@@ -42,21 +67,8 @@ namespace Samples_Activity.Controllers
                     //db.SaveChangesAsync();
                 }
             }
-            return View(model);
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return RedirectToAction("Index");
+            //return RedirectToRoute(new { controller = "Home", action = "About" });
         }
     }
 }

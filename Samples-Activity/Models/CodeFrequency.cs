@@ -12,6 +12,8 @@ namespace Samples_Activity.Models
         public int Additions { get; set; }
         public int Deletions { get; set; }
 
+        public CodeFrequency() { }
+
         public CodeFrequency(DateTimeOffset ts, int adds, int dels)
         {
             TimeStamp = ts;
