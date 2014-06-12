@@ -7,14 +7,14 @@ namespace Samples_Activity.Models
 {
     public class Repo : Octokit.Repository
     {
-        public IReadOnlyList<User> contributors { get; set; }
-        public CommitActivity commitActivity { get; set; }
-        public CodeFrequency codeFrequency { get; set; }
-        public Participation participation { get; set; }
-        public PunchCard punchCard { get; set; }
+        public virtual ICollection<CodeFrequency> codeFrequency { get; set; }
+        public virtual ICollection<WeeklyCommitActivity> commitActivity { get; set; }
+        public virtual ICollection<Contributors> contributors { get; set; }
+        public virtual ICollection<Participation> participation { get; set; }
+        public virtual ICollection<PunchCardPoint> punchCard { get; set; }
 
-        public Repo(Repository repo, IReadOnlyList<User> contributors, CommitActivity commitActivity, 
-            CodeFrequency codeFrequency, Participation participation, PunchCard punchCard)
+        public Repo(Octokit.Repository repo, IReadOnlyList<Contributor> contributors, Octokit.CommitActivity commitActivity,
+            Octokit.CodeFrequency codeFrequency, Octokit.Participation participation, Octokit.PunchCard punchCard)
         {
             this.CloneUrl = repo.CloneUrl;
             this.CreatedAt = repo.CreatedAt;
@@ -45,11 +45,21 @@ namespace Samples_Activity.Models
             this.UpdatedAt = repo.UpdatedAt;
             this.Url = repo.Url;
             this.WatchersCount = repo.WatchersCount;
-            this.contributors = contributors;
-            this.commitActivity = commitActivity;
-            this.codeFrequency = codeFrequency;
-            this.participation = participation;
-            this.punchCard = punchCard;
+
+            this.contributors = new List<Contributors>();
+            foreach (var contributor in contributors)
+            {
+                this.contributors.Add(new Contributors(contributor.Author, contributor.Total, contributor.Weeks));
+            }
+            foreach (var weeklyAct in commitActivity.Activity)
+            {
+                this.commitActivity.Add(new WeeklyCommitActivity(weeklyAct));
+            }
+
+            //this.commitActivity = new CommitActivity(commitActivity, this);
+            //this.codeFrequency = new CodeFrequency(codeFrequency, this);
+            //this.participation = new Participation(participation, this);
+            //this.punchCard = new PunchCard(punchCard, this);
         }
     }
 }
