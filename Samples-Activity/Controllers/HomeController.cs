@@ -33,19 +33,16 @@ namespace Samples_Activity.Controllers
                 var participation = await github.Repository.Statistics.GetParticipation(repo.Owner.Login, repo.Name);
                 var punchCard = await github.Repository.Statistics.GetPunchCard(repo.Owner.Login, repo.Name);
 
-            //    var newRepo = new Repo(repo, contributors, commitActivity, codeFrequency, participation, punchCard);
-            //    model.Add(newRepo);
-            //    if (ModelState.IsValid)
-            //    {
-            //        db.Repo.AddOrUpdate(newRepo);
-            //    }
+                var newRepo = new Repo(repo, contributors, commitActivity, codeFrequency, participation, punchCard);
+                model.Add(newRepo);
+                if (ModelState.IsValid)
+                {
+                    db.Repo.AddOrUpdate(newRepo);
+                    db.SaveChanges();
+                    //db.SaveChangesAsync();
+                }
             }
-
-            //db.SaveChanges();
-
-            //return View(model);
-                return View();
-           
+            return View(model);
         }
 
         public ActionResult About()

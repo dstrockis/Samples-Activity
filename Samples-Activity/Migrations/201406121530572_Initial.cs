@@ -150,27 +150,13 @@ namespace Samples_Activity.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        test = c.Int(nullable: false),
+                        All = c.Int(nullable: false),
+                        Owner = c.Int(nullable: false),
                         Repo_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Repoes", t => t.Repo_Id)
                 .Index(t => t.Repo_Id);
-            
-            CreateTable(
-                "dbo.CommitsByWeeks",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        quantity = c.Int(nullable: false),
-                        Participation_Id = c.Int(),
-                        Participation_Id1 = c.Int(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Participations", t => t.Participation_Id)
-                .ForeignKey("dbo.Participations", t => t.Participation_Id1)
-                .Index(t => t.Participation_Id)
-                .Index(t => t.Participation_Id1);
             
             CreateTable(
                 "dbo.PunchCardPoints",
@@ -192,8 +178,6 @@ namespace Samples_Activity.Migrations
         {
             DropForeignKey("dbo.PunchCardPoints", "Repo_Id", "dbo.Repoes");
             DropForeignKey("dbo.Participations", "Repo_Id", "dbo.Repoes");
-            DropForeignKey("dbo.CommitsByWeeks", "Participation_Id1", "dbo.Participations");
-            DropForeignKey("dbo.CommitsByWeeks", "Participation_Id", "dbo.Participations");
             DropForeignKey("dbo.Repoes", "Owner_Id", "dbo.Users");
             DropForeignKey("dbo.Repoes", "Organization_Id", "dbo.Users");
             DropForeignKey("dbo.Contributors", "Repo_Id", "dbo.Repoes");
@@ -202,8 +186,6 @@ namespace Samples_Activity.Migrations
             DropForeignKey("dbo.DayCounts", "WeeklyCommitActivity_Id", "dbo.WeeklyCommitActivities");
             DropForeignKey("dbo.CodeFrequencies", "Repo_Id", "dbo.Repoes");
             DropIndex("dbo.PunchCardPoints", new[] { "Repo_Id" });
-            DropIndex("dbo.CommitsByWeeks", new[] { "Participation_Id1" });
-            DropIndex("dbo.CommitsByWeeks", new[] { "Participation_Id" });
             DropIndex("dbo.Participations", new[] { "Repo_Id" });
             DropIndex("dbo.WeeklyHashes", new[] { "Contributors_Id" });
             DropIndex("dbo.Contributors", new[] { "Repo_Id" });
@@ -213,7 +195,6 @@ namespace Samples_Activity.Migrations
             DropIndex("dbo.Repoes", new[] { "Owner_Id" });
             DropIndex("dbo.Repoes", new[] { "Organization_Id" });
             DropTable("dbo.PunchCardPoints");
-            DropTable("dbo.CommitsByWeeks");
             DropTable("dbo.Participations");
             DropTable("dbo.Users");
             DropTable("dbo.WeeklyHashes");

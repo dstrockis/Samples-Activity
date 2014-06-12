@@ -13,7 +13,9 @@ namespace Samples_Activity.Models
         public virtual ICollection<Participation> participation { get; set; }
         public virtual ICollection<PunchCardPoint> punchCard { get; set; }
 
-        public Repo(Octokit.Repository repo, IReadOnlyList<Contributor> contributors, Octokit.CommitActivity commitActivity,
+        public Repo() {}
+
+        public Repo(Octokit.Repository repo, IEnumerable<Contributor> contributors, Octokit.CommitActivity commitActivity,
             Octokit.CodeFrequency codeFrequency, Octokit.Participation participation, Octokit.PunchCard punchCard)
         {
             this.CloneUrl = repo.CloneUrl;
@@ -51,15 +53,28 @@ namespace Samples_Activity.Models
             {
                 this.contributors.Add(new Contributors(contributor.Author, contributor.Total, contributor.Weeks));
             }
+            this.commitActivity = new List<WeeklyCommitActivity>();
             foreach (var weeklyAct in commitActivity.Activity)
             {
                 this.commitActivity.Add(new WeeklyCommitActivity(weeklyAct));
             }
-
-            //this.commitActivity = new CommitActivity(commitActivity, this);
-            //this.codeFrequency = new CodeFrequency(codeFrequency, this);
-            //this.participation = new Participation(participation, this);
-            //this.punchCard = new PunchCard(punchCard, this);
+            this.codeFrequency = new List<CodeFrequency>();
+            foreach (var AAndDByWeek in codeFrequency.AdditionsAndDeletionsByWeek)
+            {
+                this.codeFrequency.Add(new CodeFrequency(AAndDByWeek.Timestamp, AAndDByWeek.Additions, AAndDByWeek.Deletions));
+            }
+            this.participation = new List<Participation>();
+            var AllEnum = participation.All.GetEnumerator();
+            var OwnEnum = participation.Owner.GetEnumerator();
+            while (AllEnum.MoveNext() && OwnEnum.MoveNext())
+            {
+                this.participation.Add(new Participation(AllEnum.Current, OwnEnum.Current));
+            }
+            this.punchCard = new List<PunchCardPoint>();
+            foreach (var pcp in punchCard.PunchPoints)
+            {
+                this.punchCard.Add(new PunchCardPoint(pcp.DayOfWeek, pcp.HourOfTheDay, pcp.CommitCount));
+            }
         }
     }
 }

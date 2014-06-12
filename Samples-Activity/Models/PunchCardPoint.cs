@@ -11,5 +11,12 @@ namespace Samples_Activity.Models
         public DayOfWeek DayOfWeek { get; set; }
         public int HourOfTheDay { get; set; }
         public int CommitCount { get; set; }
+
+        public PunchCardPoint(DayOfWeek DoW, int HoD, int cCount)
+        {
+            DayOfWeek = DoW;
+            HourOfTheDay = HoD;
+            CommitCount = cCount;
+        }
     }
 }

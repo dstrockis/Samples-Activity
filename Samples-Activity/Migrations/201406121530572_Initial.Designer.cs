@@ -13,7 +13,7 @@ namespace Samples_Activity.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201406120318489_Initial"; }
+            get { return "201406121530572_Initial"; }
         }
         
         string IMigrationMetadata.Source

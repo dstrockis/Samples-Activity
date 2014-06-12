@@ -24,6 +24,7 @@ namespace Samples_Activity.Models
         {
             Week = weeklyAct.Week;
             Total = weeklyAct.Total;
+            this.Days = new List<DayCount>();
             foreach (var count in weeklyAct.Days)
             {
                 Days.Add(new DayCount(count));

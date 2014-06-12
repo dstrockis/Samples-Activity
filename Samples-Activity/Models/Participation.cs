@@ -8,15 +8,13 @@ namespace Samples_Activity.Models
     public class Participation
     {
         public int Id { get; set; }
-        public int test { get; set; }
+        public int All { get; set; }
+        public int Owner { get; set; }
 
-        public class CommitsByWeek
+        public Participation(int All, int Owner)
         {
-            public int Id { get; set; }
-            public int quantity { get; set; } 
+            this.All = All;
+            this.Owner = Owner;
         }
-
-        public ICollection<CommitsByWeek> Owner { get; set; }
-        public ICollection<CommitsByWeek> All { get; set; }
     }
 }

@@ -36,6 +36,7 @@ namespace Samples_Activity.Models
             AuthorId = author.Id;
             AuthorType = author.Type;
             Total = total;
+            Weeks = new List<WeeklyHash>();
             foreach (var week in weeks)
             {
                 Weeks.Add(new WeeklyHash(week.W, week.A, week.D, week.C));

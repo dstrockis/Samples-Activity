@@ -43,8 +43,6 @@ namespace Samples_Activity.DAL
             modelBuilder.Entity<Repo>().HasMany(p => p.participation);
             modelBuilder.Entity<Repo>().HasMany(c => c.codeFrequency);
             modelBuilder.Entity<Repo>().HasMany(p => p.punchCard);
-            modelBuilder.Entity<Samples_Activity.Models.Participation>().HasMany(o => o.Owner);
-            modelBuilder.Entity<Samples_Activity.Models.Participation>().HasMany(a => a.All);
             modelBuilder.Entity<Repo>().HasMany(c => c.commitActivity);
             modelBuilder.Entity<Samples_Activity.Models.WeeklyCommitActivity>().HasMany(d => d.Days);
             modelBuilder.Entity<Repo>().HasMany(c => c.contributors);
