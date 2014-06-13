@@ -13,6 +13,8 @@ using System.Data.Entity.Migrations;
 using System.Data;
 using System.Data.Entity;
 using System.Web.UI.DataVisualization.Charting;
+using System.Web.Script.Serialization;
+using Octokit.Helpers;
 
 
 
@@ -24,14 +26,20 @@ namespace Samples_Activity.Controllers
         public async Task<ActionResult> Index()
         {
             var repoList = await db.Repo.ToListAsync();
-            var weeks = db.Database.SqlQuery<long>(
+            var weekHashes = db.Database.SqlQuery<long>(
                 "Select h.W FROM WeeklyHashes h GROUP BY h.W"
                 ).ToArray();
             var commitCounts = db.Database.SqlQuery<int>(
                 "Select SUM(h.C) FROM WeeklyHashes h GROUP BY h.W"
                 ).ToArray();
-            var model = new { weekArray = weeks, commitArray = commitCounts }; //BOOKMARK
-            return View(model);
+            var weeks = new string[weekHashes.Length];
+            for (var i = 0; i < weekHashes.Length; i++)
+            {
+                weeks[i] = weekHashes[i].FromUnixTime().Date.Month.ToString() + '/' + weekHashes[i].FromUnixTime().Date.Day.ToString();
+            }
+            ViewData["weekArray"] = weeks;
+            ViewData["commitArray"] = commitCounts;
+            return View();
         }
 
         public ActionResult About()

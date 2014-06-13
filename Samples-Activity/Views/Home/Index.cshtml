@@ -11,6 +11,8 @@
 
 
 
+@Html.Partial("_contributorChart", ViewData)
+
 @*<div class="CSSTableGenerator">
     <table>
         <tr>
@@ -28,36 +30,3 @@
     </table>
 </div>*@
 
-<script>alert(@Model.weekArray[0])</script>
-
-@*<div class="ChartRegion">
-    <canvas id="myChart" width="400" height="400"></canvas>
-    <script>
-        var ctx = $("#myChart").get(0).getContext("2d");
-
-        var data = {
-            labels: [],
-            datasets: [
-                {
-                    fillColor: "";
-                    strokeColor: "",
-                    pointColor: "",
-                    pointStrokeColor: "",
-                    data: []
-                },
-                {
-                    fillColor: "";
-                    strokeColor: "",
-                    pointColor: "",
-                    pointStrokeColor: "",
-                    data: []
-                }
-            ]
-        };
-
-        var options = {};
-
-
-        var myNewChart = new Chart(ctx).Line(data, options);
-    </script>
-</div>*@
