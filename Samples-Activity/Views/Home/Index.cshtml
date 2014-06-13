@@ -2,7 +2,7 @@
     ViewBag.Title = "Home Page";
 }
 
-@model List<Samples_Activity.Models.Repo>
+
 
 <div class="jumbotron">
     <h2>Azure AD Samples Activity Summary</h2>
@@ -11,7 +11,7 @@
 
 
 
-<div class="CSSTableGenerator">
+@*<div class="CSSTableGenerator">
     <table>
         <tr>
             <td>Owning Organization</td>
@@ -26,4 +26,38 @@
             </tr>
         }
     </table>
-</div>
+</div>*@
+
+<script>alert(@Model.weekArray[0])</script>
+
+@*<div class="ChartRegion">
+    <canvas id="myChart" width="400" height="400"></canvas>
+    <script>
+        var ctx = $("#myChart").get(0).getContext("2d");
+
+        var data = {
+            labels: [],
+            datasets: [
+                {
+                    fillColor: "";
+                    strokeColor: "",
+                    pointColor: "",
+                    pointStrokeColor: "",
+                    data: []
+                },
+                {
+                    fillColor: "";
+                    strokeColor: "",
+                    pointColor: "",
+                    pointStrokeColor: "",
+                    data: []
+                }
+            ]
+        };
+
+        var options = {};
+
+
+        var myNewChart = new Chart(ctx).Line(data, options);
+    </script>
+</div>*@

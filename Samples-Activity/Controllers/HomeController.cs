@@ -12,7 +12,7 @@ using System.Web.Mvc;
 using System.Data.Entity.Migrations;
 using System.Data;
 using System.Data.Entity;
-
+using System.Web.UI.DataVisualization.Charting;
 
 
 
@@ -24,7 +24,14 @@ namespace Samples_Activity.Controllers
         public async Task<ActionResult> Index()
         {
             var repoList = await db.Repo.ToListAsync();
-            return View();
+            var weeks = db.Database.SqlQuery<long>(
+                "Select h.W FROM WeeklyHashes h GROUP BY h.W"
+                ).ToArray();
+            var commitCounts = db.Database.SqlQuery<int>(
+                "Select SUM(h.C) FROM WeeklyHashes h GROUP BY h.W"
+                ).ToArray();
+            var model = new { weekArray = weeks, commitArray = commitCounts }; //BOOKMARK
+            return View(model);
         }
 
         public ActionResult About()
