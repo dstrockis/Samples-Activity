@@ -68,6 +68,14 @@ namespace Samples_Activity.Models
                 return "/login/oauth/access_token";
             }
         }
+
+        public static int numWeeksToInclude
+        {
+            get
+            {
+                return 50;
+            }
+        }
     }
 
 }

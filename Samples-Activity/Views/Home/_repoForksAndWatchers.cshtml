@@ -1,0 +1,26 @@
+﻿<div>
+    <canvas id="forksAndWatchersChart" width="400" height="400"></canvas>
+    <script type="text/javascript">
+        var ctx = $("#forksAndWatchersChart").get(0).getContext("2d");
+        var names = @Html.Raw(Json.Encode(ViewData["repoNames"]));
+        var commitCount = @Json.Encode(ViewData["repoMonthCommitCounts"]);
+        var forks = @Json.Encode(ViewData["forksCounts"]);
+        var watchers = @Json.Encode(ViewData["watchersCounts"]);
+        var data = {
+            labels: names,
+            datasets: [
+                {
+                    fillColor: "rgba(220,220,220,0.5)",
+                    strokeColor: "rgba(220,220,220,1)",
+                    data: forks
+                },
+                {
+                    fillColor: "rgba(151,187,205,0.5)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    data: watchers
+                }
+            ]
+        };
+        var myNewChart = new Chart(ctx).Bar(data);
+    </script>
+</div>

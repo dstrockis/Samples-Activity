@@ -26,6 +26,8 @@ namespace Samples_Activity.Controllers
         public async Task<ActionResult> Index()
         {
             var repoList = await db.Repo.ToListAsync();
+            
+            //Total Commits on AzureADSamples By Week -- Line Chart
             var weekHashes = db.Database.SqlQuery<long>(
                 "Select h.W FROM WeeklyHashes h GROUP BY h.W"
                 ).ToArray();
@@ -39,6 +41,40 @@ namespace Samples_Activity.Controllers
             }
             ViewData["weekArray"] = weeks;
             ViewData["commitArray"] = commitCounts;
+
+            
+            var repoNames = new string[repoList.Count];
+            commitCounts = new int[repoList.Count];
+            var forksCounts = new int[repoList.Count];
+            var watchersCounts = new int[repoList.Count];
+            for (int i=0; i < repoList.Count; i++)
+            {
+
+                //Commits Over Last Month By Repo -- Radar Chart
+                repoNames[i] = repoList[i].Name;
+                int commitTotal = 0;
+                var weekEnum1 = repoList[i].commitActivity.GetEnumerator();
+                var weekEnum2 = repoList[i].commitActivity.GetEnumerator();
+                for (int j = 0; j < Globals.numWeeksToInclude; j++)
+                    weekEnum1.MoveNext();
+                while (weekEnum1.MoveNext())
+                    weekEnum2.MoveNext();
+                while (weekEnum2.MoveNext())
+                {
+                    commitTotal += weekEnum2.Current.Total;
+                }
+                commitCounts[i] = commitTotal;
+
+                //All-Time Forks and Watchers
+                forksCounts[i] = repoList[i].ForksCount;
+                watchersCounts[i] = repoList[i].WatchersCount;
+            }
+            ViewData["repoNames"] = repoNames;
+            ViewData["repoMonthCommitCounts"] = commitCounts;
+            ViewData["forksCounts"] = forksCounts;
+            ViewData["watchersCounts"] = watchersCounts;
+
+
             return View();
         }
 

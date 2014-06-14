@@ -22,7 +22,6 @@ namespace Samples_Activity.Models
             this.CreatedAt = repo.CreatedAt;
             this.Description = repo.Description;
             this.Fork = repo.Fork;
-            this.ForksCount = repo.ForksCount;
             this.FullName = repo.FullName;
             this.GitUrl = repo.GitUrl;
             this.HasDownloads = repo.HasDownloads;
@@ -46,6 +45,8 @@ namespace Samples_Activity.Models
             this.SvnUrl = repo.SvnUrl;
             this.UpdatedAt = repo.UpdatedAt;
             this.Url = repo.Url;
+
+            this.ForksCount = repo.ForksCount;
             this.WatchersCount = repo.WatchersCount;
 
             this.contributors = new List<Contributors>();

@@ -1,11 +1,9 @@
 ﻿<div>
-    <canvas id="myChart" width="400" height="400"></canvas>
+    <canvas id="contributorChart" width="400" height="400"></canvas>
     <script type="text/javascript">
-        alert("test3")
-        var ctx = $("#myChart").get(0).getContext("2d");
+        var ctx = $("#contributorChart").get(0).getContext("2d");
         var weeks = @Html.Raw(Json.Encode(ViewData["weekArray"]));
         var contributorCount = @Json.Encode(ViewData["commitArray"]);
-        alert("test2")
         var data = {
             labels: weeks,
             datasets: [
