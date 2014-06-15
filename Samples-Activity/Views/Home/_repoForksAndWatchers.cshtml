@@ -1,5 +1,5 @@
 ﻿<div>
-    <canvas id="forksAndWatchersChart" width="400" height="400"></canvas>
+    <canvas id="forksAndWatchersChart" width="1000" height="1000"></canvas>
     <script type="text/javascript">
         var ctx = $("#forksAndWatchersChart").get(0).getContext("2d");
         var names = @Html.Raw(Json.Encode(ViewData["repoNames"]));

@@ -73,7 +73,7 @@ namespace Samples_Activity.Models
         {
             get
             {
-                return 50;
+                return 10;
             }
         }
     }

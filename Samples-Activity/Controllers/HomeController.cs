@@ -50,7 +50,7 @@ namespace Samples_Activity.Controllers
             for (int i=0; i < repoList.Count; i++)
             {
 
-                //Commits Over Last Month By Repo -- Radar Chart
+                //Commits Over Last X Weeks By Repo -- Radar Chart
                 repoNames[i] = repoList[i].Name;
                 int commitTotal = 0;
                 var weekEnum1 = repoList[i].commitActivity.GetEnumerator();
@@ -114,10 +114,9 @@ namespace Samples_Activity.Controllers
                 if (ModelState.IsValid)
                 {
                     db.Repo.AddOrUpdate(newRepo);
-                    db.SaveChanges();
-                    //db.SaveChangesAsync();
                 }
             }
+            db.SaveChangesAsync();
             return RedirectToAction("Index");
             //return RedirectToRoute(new { controller = "Home", action = "About" });
         }
