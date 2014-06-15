@@ -23,8 +23,10 @@ namespace Samples_Activity.Controllers
     public class HomeController : Controller
     {
         private RepoContext db = new RepoContext();
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string origin)
         {
+            ViewBag.Origin = origin;
+
             var repoList = await db.Repo.ToListAsync();
             
             //Total Commits on AzureADSamples By Week -- Line Chart
@@ -117,7 +119,7 @@ namespace Samples_Activity.Controllers
                 }
             }
             db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { origin = "Refresh" });
             //return RedirectToRoute(new { controller = "Home", action = "About" });
         }
     }

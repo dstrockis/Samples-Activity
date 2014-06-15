@@ -15,8 +15,8 @@ namespace Samples_Activity
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                url: "{controller}/{action}/{origin}",
+                defaults: new { controller = "Home", action = "Index", origin = UrlParameter.Optional }
             );
         }
     }
