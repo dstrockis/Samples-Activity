@@ -13,16 +13,17 @@
         {
             @Html.ActionLink("Run Data Refresh Job", "Refresh", null, new { @class = "refresh-link" });
         }
-        else {
+        else if (ViewBag.Origin == "Refresh") {
             <p>Data Refresh Job Running. ~15 min to completion.</p>
         }
-    }
+}
 </div>
 
 
 @Html.Partial("_repoActivityChart", ViewData)
 @Html.Partial("_repoForksAndWatchers", ViewData)
 @Html.Partial("_contributorChart", ViewData)
+
 
 
 <script>

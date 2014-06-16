@@ -76,6 +76,24 @@ namespace Samples_Activity.Models
                 return 10;
             }
         }
+
+        public static string mailUser
+        {
+            get
+            {
+                return "d.l.strockis@gmail.com";
+            }
+        }
+
+        public static string mailUserPwd
+        {
+            get
+            {
+                return "@Mammoth2";
+            }
+        }
+
+
     }
 
 }

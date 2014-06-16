@@ -15,7 +15,8 @@ using System.Data.Entity;
 using System.Web.UI.DataVisualization.Charting;
 using System.Web.Script.Serialization;
 using Octokit.Helpers;
-
+using System.Net.Mail;
+using System.Net.Mime;
 
 
 namespace Samples_Activity.Controllers
@@ -121,6 +122,25 @@ namespace Samples_Activity.Controllers
             db.SaveChangesAsync();
             return RedirectToAction("Index", new { origin = "Refresh" });
             //return RedirectToRoute(new { controller = "Home", action = "About" });
+        }
+
+        public ActionResult SendMail(string origin)
+        {
+            SmtpClient client = new SmtpClient("smtp.gmail.com");
+            client.Port = 587;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(Globals.mailUser, Globals.mailUserPwd);
+            client.EnableSsl = true;
+            client.Credentials = credentials;
+
+            var mail = new MailMessage("d.l.strockis@gmail.com", "d.l.strockis@gmail.com");
+            mail.Subject = "Test Email";
+            mail.Body = "<a href='https://http://aadsamplesactivity.azurewebsites.net/'>Click Here To View AAD Samples Github Data</a>";
+            mail.IsBodyHtml = true;
+            client.Send(mail);
+            
+            return RedirectToAction("Index", new { origin = origin });        
         }
     }
 }
