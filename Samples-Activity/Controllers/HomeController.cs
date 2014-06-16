@@ -128,9 +128,9 @@ namespace Samples_Activity.Controllers
                 if (ModelState.IsValid)
                 {
                     db.Repo.Add(newRepo);
-                    db.SaveChangesAsync();
                 }
             }
+            db.SaveChangesAsync();
             return RedirectToAction("Index", new { origin = "Refresh" });
             //return RedirectToRoute(new { controller = "Home", action = "About" });
         }
