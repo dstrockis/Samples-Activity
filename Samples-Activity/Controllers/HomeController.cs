@@ -97,6 +97,16 @@ namespace Samples_Activity.Controllers
 
         public async Task<ActionResult> Refresh()
         {
+            db.Database.ExecuteSqlCommand("delete from WeeklyHashes");
+            db.Database.ExecuteSqlCommand("delete from DayCounts");
+            db.Database.ExecuteSqlCommand("delete from WeeklyCommitActivities");
+            db.Database.ExecuteSqlCommand("delete from PunchCardPoints");
+            db.Database.ExecuteSqlCommand("delete from Participations");
+            db.Database.ExecuteSqlCommand("delete from Contributors");
+            db.Database.ExecuteSqlCommand("delete from CodeFrequencies");
+            db.Database.ExecuteSqlCommand("delete from Repoes");
+            db.Database.ExecuteSqlCommand("delete from Users");
+
             var github = new GitHubClient(new ProductHeaderValue(Globals.GitHubAppName))
             {
                 Credentials = new Credentials("dstrockis", "@Mammoth2")
@@ -106,6 +116,7 @@ namespace Samples_Activity.Controllers
             var model = new List<Repo>();
             foreach (var repo in repos)
             {
+
                 var contributors = await github.Repository.Statistics.GetContributors(repo.Owner.Login, repo.Name);
                 var commitActivity = await github.Repository.Statistics.GetCommitActivity(repo.Owner.Login, repo.Name);
                 var codeFrequency = await github.Repository.Statistics.GetCodeFrequency(repo.Owner.Login, repo.Name);
@@ -116,10 +127,10 @@ namespace Samples_Activity.Controllers
                 model.Add(newRepo);
                 if (ModelState.IsValid)
                 {
-                    db.Repo.AddOrUpdate(newRepo);
+                    db.Repo.Add(newRepo);
+                    db.SaveChangesAsync();
                 }
             }
-            db.SaveChangesAsync();
             return RedirectToAction("Index", new { origin = "Refresh" });
             //return RedirectToRoute(new { controller = "Home", action = "About" });
         }
