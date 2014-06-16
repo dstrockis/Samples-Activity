@@ -117,13 +117,14 @@ namespace Samples_Activity.Controllers
                 if (ModelState.IsValid)
                 {
                     db.Repo.AddOrUpdate(newRepo);
+                    db.SaveChangesAsync();
                 }
             }
-            db.SaveChangesAsync();
             return RedirectToAction("Index", new { origin = "Refresh" });
             //return RedirectToRoute(new { controller = "Home", action = "About" });
         }
 
+        [HttpGet]
         public ActionResult SendMail(string origin)
         {
             SmtpClient client = new SmtpClient("smtp.gmail.com");
