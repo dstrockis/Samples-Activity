@@ -2,9 +2,11 @@
     ViewBag.Title = "Home Page";
 }
 
+@Html.Partial("_repoActivityChart", ViewData)
+@Html.Partial("_repoForksAndWatchers", ViewData)
+@Html.Partial("_contributorChart", ViewData)
 
-
-<div class="jumbotron">
+<div class="jumbotron" style="position: relative; top: -2730px">
     <h2>AAD Samples Github Activity</h2>
     @{
         if (ViewBag.Origin == null)
@@ -21,9 +23,7 @@
 
 
 
-@Html.Partial("_repoActivityChart", ViewData)
-@Html.Partial("_repoForksAndWatchers", ViewData)
-@Html.Partial("_contributorChart", ViewData)
+
 
 
 
@@ -31,4 +31,5 @@
     $(".refresh-link").click(function() {
         $( this ).replaceWith("<p>Data Refresh Job Running. ~15 min to completion.</p>");
     });
+    alert('test');
 </script>

@@ -1,5 +1,5 @@
-﻿    <h3 style="position:relative; left:300px; top:-600px; color: rgba(151,187,250,1)">Total Commits By Week</h3>
-    <canvas id="contributorChart" width="500" height="500" style="position:relative; left:200px; top: -600px"></canvas>
+﻿    <h3 style="position:relative; left:300px; top:-400px; color: rgba(151,187,250,1)">Total Commits By Week</h3>
+    <canvas id="contributorChart" width="500" height="500" style="position:relative; left:200px; top: -400px"></canvas>
     <script type="text/javascript">
         var ctx = $("#contributorChart").get(0).getContext("2d");
         var weeks = @Html.Raw(Json.Encode(ViewData["weekArray"]));
