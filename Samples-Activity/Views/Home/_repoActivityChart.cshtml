@@ -1,5 +1,5 @@
-﻿<div>
-    <canvas id="repoActivityChart" width="1500" height="1500"></canvas>
+﻿    <h3 style="position:relative; left:400px">Recent Commit Activity Distribution</h3>
+    <canvas id="repoActivityChart" width="1000" height="1000" style="position:relative; left:100px; top: -300px"></canvas>
     <script type="text/javascript">
         var ctx = $("#repoActivityChart").get(0).getContext("2d");
         var names = @Html.Raw(Json.Encode(ViewData["repoNames"]));
@@ -19,4 +19,3 @@
         };
         var myNewChart = new Chart(ctx).Radar(data);
     </script>
-</div>

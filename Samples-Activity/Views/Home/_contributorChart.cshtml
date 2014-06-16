@@ -1,5 +1,5 @@
 ﻿<div>
-    <canvas id="contributorChart" width="400" height="400"></canvas>
+    <canvas id="contributorChart" width="1000" height="1000" style="position:relative; left:100px; top: 300px"></canvas>
     <script type="text/javascript">
         var ctx = $("#contributorChart").get(0).getContext("2d");
         var weeks = @Html.Raw(Json.Encode(ViewData["weekArray"]));

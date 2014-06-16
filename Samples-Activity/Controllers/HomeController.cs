@@ -124,7 +124,6 @@ namespace Samples_Activity.Controllers
             //return RedirectToRoute(new { controller = "Home", action = "About" });
         }
 
-        [HttpGet]
         public ActionResult SendMail(string origin)
         {
             SmtpClient client = new SmtpClient("smtp.gmail.com");

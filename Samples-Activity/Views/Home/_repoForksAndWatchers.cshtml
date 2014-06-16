@@ -1,5 +1,4 @@
-﻿<div>
-    <canvas id="forksAndWatchersChart" width="1000" height="1000"></canvas>
+﻿    <canvas id="forksAndWatchersChart" width="1000" height="1000" style="position:relative; left:100px; top: 300px"></canvas>
     <script type="text/javascript">
         var ctx = $("#forksAndWatchersChart").get(0).getContext("2d");
         var names = @Html.Raw(Json.Encode(ViewData["repoNames"]));
@@ -23,4 +22,3 @@
         };
         var myNewChart = new Chart(ctx).Bar(data);
     </script>
-</div>
