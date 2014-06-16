@@ -5,10 +5,8 @@
 
 
 <div class="jumbotron">
-    <h2>Azure AD Samples Activity Summary</h2>
+    <h2>AAD Samples Github Activity</h2>
     @{
-        var test = ViewBag.Origin;
-        var test2 = test;
         if (ViewBag.Origin == null)
         {
             @Html.ActionLink("Run Data Refresh Job", "Refresh", null, new { @class = "refresh-link" });
@@ -16,8 +14,11 @@
         else if (ViewBag.Origin == "Refresh") {
             <p>Data Refresh Job Running. ~15 min to completion.</p>
         }
-}
+    }
+
 </div>
+
+
 
 
 @Html.Partial("_repoActivityChart", ViewData)

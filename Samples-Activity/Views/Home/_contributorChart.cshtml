@@ -1,5 +1,5 @@
-﻿<div>
-    <canvas id="contributorChart" width="1000" height="1000" style="position:relative; left:100px; top: 300px"></canvas>
+﻿    <h3 style="position:relative; left:300px; top:-600px; color: rgba(151,187,250,1)">Watchers & Fork Counts By Repo</h3>
+    <canvas id="contributorChart" width="500" height="500" style="position:relative; left:200px; top: -600px"></canvas>
     <script type="text/javascript">
         var ctx = $("#contributorChart").get(0).getContext("2d");
         var weeks = @Html.Raw(Json.Encode(ViewData["weekArray"]));
@@ -18,4 +18,4 @@
         };
         var myNewChart = new Chart(ctx).Line(data);
     </script>
-</div>
+
