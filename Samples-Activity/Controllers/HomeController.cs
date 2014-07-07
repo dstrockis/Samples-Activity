@@ -109,7 +109,7 @@ namespace Samples_Activity.Controllers
 
             var github = new GitHubClient(new ProductHeaderValue(Globals.GitHubAppName))
             {
-                Credentials = new Credentials("dstrockis", "@Mammoth2")
+                Credentials = new Credentials("dstrockis", "password")
             };
             var repos = await github.Repository.GetAllForOrg(Globals.GitHubOrg);
 

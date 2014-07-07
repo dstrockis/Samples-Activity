@@ -89,7 +89,7 @@ namespace Samples_Activity.Models
         {
             get
             {
-                return "@Mammoth2";
+                return "password";
             }
         }
 
